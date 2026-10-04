@@ -18,6 +18,26 @@ An autonomous differential-drive mobile robot engineered to track high-contrast 
 
 ---
 
+## ⚠️ Challenges & Engineering Solutions
+
+### 1. Brownout Resets & Microcontroller Instability
+* **The Problem:** During aggressive motor reversals or high-torque turns, the Arduino would intermittently reboot and freeze due to inductive kickback noise and voltage dips caused by sharing a single power rail with the high-current DC motors.
+* **The Solution:** Separated the power rails by introducing isolated battery supplies for logic vs. drive motors. Connected a shared reference ground while decoupling the Arduino via independent voltage regulation to eliminate inductive back-EMF spikes.
+
+### 2. High-Speed Oscillation & Tracking Hunting
+* **The Problem:** Using standard bang-bang (binary) on/off steering logic caused severe lateral jitter and chassis hunting, frequently causing the robot to overshoot tight radius curves and fly off track.
+* **The Solution:** Transitioned to a multi-channel sensor array with graded differential PWM speed adjustments. The firmware evaluates sensor position index offsets to apply proportional speed reductions on the inner wheel and boosts on the outer wheel, smoothing turning arcs and stabilizing high-speed tracking.
+
+### 3. Ambient Lighting & Surface Inconsistency
+* **The Problem:** Fluctuating overhead room lighting and varying flooring reflectivity led to false line detections and premature stop triggers.
+* **The Solution:** Recalibrated comparator threshold potentiometers on the TCRT5000 modules, added physical sensor shielding to block direct overhead light bleed, and introduced software debounce loops to filter transient optical false-positives.
+
+### 4. Sharp 90-Degree Turn Recovery
+* **The Problem:** On acute right-angle bends, all front sensors would simultaneously lose contact with the line, causing the robot to drive straight into dead zones.
+* **The Solution:** Implemented a software state-memory flag in embedded C/C++ that retains the "last active sensor index." If all sensors read reflective floor unexpectedly, the robot initiates an in-place pivot spin in the direction of the last known track state until line lock is reacquired.
+
+---
+
 ## 🌟 Key Highlights
 
 * **Multi-Channel Optical Sensing:** Integrated a front-mounted multi-channel IR sensor bar (with active indicator LEDs) to sample lateral track deviations with high spatial resolution compared to basic 2-sensor setups.
