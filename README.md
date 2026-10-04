@@ -29,30 +29,30 @@ An autonomous differential-drive mobile robot engineered to track high-contrast 
 ---
 
 ## 📐 System Architecture
-+--------------------------------------+
-             |      High-Contrast Track (Tape)      |
-             +--------------------------------------+
-                                │
-                                ▼ (Reflected IR Light)
-             +--------------------------------------+
-             |     Multi-Channel IR Sensor Bar      |
-             +--------------------------------------+
-                                │ Digital Sensor States
-                                ▼
-             +--------------------------------------+
-             |          Arduino Uno (MCU)           |
-             |     (Tracking & Steering Logic)      |
-             +--------------------------------------+
-                                │ PWM & Direction Logic
-                                ▼
-             +--------------------------------------+
-             |       L298N Dual Motor Driver        |
-             +--------------------------------------+
-                                │ High-Current Drive
-                                ▼
-             +--------------------------------------+
-             |       Left & Right DC Motors         |
-             +--------------------------------------+
++-----------------------------+
+       |  High-Contrast Track (Tape) |
+       +-----------------------------+
+                      │
+                      ▼ (Reflected IR)
+       +-----------------------------+
+       | Multi-Channel IR Sensor Bar |
+       +-----------------------------+
+                      │
+                      ▼ (Digital States)
+       +-----------------------------+
+       |      Arduino Uno (MCU)      |
+       |  Tracking & Steering Logic  |
+       +-----------------------------+
+                      │
+                      ▼ (PWM & Direction)
+       +-----------------------------+
+       |   L298N Dual Motor Driver   |
+       +-----------------------------+
+                      │
+                      ▼ (High-Current Drive)
+       +-----------------------------+
+       |    Left & Right DC Motors   |
+       +-----------------------------+
 
 ---
 
