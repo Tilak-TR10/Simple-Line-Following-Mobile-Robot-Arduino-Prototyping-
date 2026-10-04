@@ -29,7 +29,7 @@ An autonomous differential-drive mobile robot engineered to track high-contrast 
 ---
 
 ## 📐 System Architecture
-+-----------------------------+
+       +-----------------------------+
        |  High-Contrast Track (Tape) |
        +-----------------------------+
                       │
